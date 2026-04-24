@@ -1,0 +1,285 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.data.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+// Extract FAQs from content headings for FAQ schema
+// Build FAQ structured data from common question patterns
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": []
+};
+
+// Build Article schema for blog posts (AI overview optimized)
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": post.data.title,
+  "description": post.data.description || `Expert guide about ${post.data.title} by Stone World — India's leading natural stone supplier.`,
+  "author": {
+    "@type": "Organization",
+    "name": "Stone World",
+    "url": "https://stoneworld.co.in"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Stone World",
+    "url": "https://stoneworld.co.in",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://stoneworld.co.in/images/cropped-logo-1-1.png"
+    }
+  },
+  "datePublished": post.data.date || "2025-01-01",
+  "dateModified": post.data.date || "2025-01-01",
+  "mainEntityOfPage": `https://stoneworld.co.in/blog/${post.data.slug}/`,
+  "image": post.data.image || "https://stoneworld.co.in/wp-content/uploads/2025/03/slider-1.jpg"
+};
+
+// Determine related application areas and collections for CTA
+const slug = post.data.slug || '';
+const relatedLinks = [];
+
+// Map blog content to relevant product/collection pages
+const blogCollectionMap: Record<string, { href: string; label: string }[]> = {
+  'fireplace': [
+    { href: '/application-area/fireplace/', label: 'Stone Fireplace Designs' },
+    { href: '/our-collections/stone-veneers/', label: 'Stone Veneers Collection' }
+  ],
+  'facade': [
+    { href: '/application-area/facade/', label: 'Facade Applications' },
+    { href: '/our-collections/natural-stone-claddings/', label: 'Stone Claddings' }
+  ],
+  'staircase': [
+    { href: '/application-area/staircase/', label: 'Staircase Designs' }
+  ],
+  'bathroom': [
+    { href: '/application-area/bathroom/', label: 'Stone Bathroom Designs' },
+    { href: '/application-area/wash-basin/', label: 'Stone Wash Basins' }
+  ],
+  'landscape': [
+    { href: '/application-area/landscape/', label: 'Landscape Stone Ideas' },
+    { href: '/application-area/courtyard/', label: 'Courtyard Designs' }
+  ],
+  'name-plate': [
+    { href: '/application-area/stone-name-plate/', label: 'Stone Name Plate Designs' },
+    { href: '/our-collections/stone-artefacts/', label: 'Stone Artefacts' }
+  ],
+  'floor': [
+    { href: '/application-area/floor/', label: 'Stone Flooring Designs' },
+    { href: '/our-collections/hand-cut-carpet-mosaics/', label: 'Carpet Mosaics' }
+  ],
+  'wall': [
+    { href: '/application-area/partition-wall/', label: 'Partition Wall Ideas' },
+    { href: '/application-area/double-height-wall/', label: 'Double Height Wall' },
+    { href: '/our-collections/wall-floor-highlighters/', label: 'Wall Highlighters' }
+  ],
+};
+
+// Find matching blog-to-product links
+const matchedLinks: { href: string; label: string }[] = [];
+for (const [key, links] of Object.entries(blogCollectionMap)) {
+  if (slug.includes(key) || post.data.title?.toLowerCase().includes(key)) {
+    matchedLinks.push(...links);
+  }
+}
+// Default fallback links
+if (matchedLinks.length === 0) {
+  matchedLinks.push(
+    { href: '/application-area/', label: 'Explore All Applications' },
+    { href: '/our-collections/', label: 'Browse Collections' }
+  );
+}
+---
+
+<Layout
+  title={`${post.data.title} | Stone World Blog`}
+  description={post.data.description || `Expert insights about ${post.data.title} from Stone World — India's leading natural stone supplier.`}
+  schema={articleSchema}>
+
+  <!-- Page Hero -->
+  <section class="cat-hero">
+    <div class="cat-hero__overlay"></div>
+    {post.data.image ? (
+      <img src={post.data.image} alt={post.data.title} loading="eager" />
+    ) : (
+      <img src="/wp-content/uploads/2025/03/inner-banner1.jpg" alt="Stone World Blog" loading="eager" />
+    )}
+    <div class="cat-hero__content">
+      <span class="cat-hero__eyebrow">Stone World Blog</span>
+      <h1>{post.data.title}</h1>
+      <div class="cat-hero__rule"></div>
+    </div>
+  </section>
+
+  <!-- Blog Content -->
+  <section style="padding:4rem 0;background:#fff;">
+    <div style="max-width:820px;margin:0 auto;padding:0 1.5rem;">
+
+      <!-- Breadcrumb + Meta -->
+      <div style="display:flex;align-items:center;gap:1.25rem;margin-bottom:2rem;padding-bottom:1.25rem;border-bottom:1px solid #efefef;flex-wrap:wrap;">
+        <a href="/" style="display:flex;align-items:center;gap:0.3rem;color:#888;text-decoration:none;font-size:0.82rem;font-weight:500;transition:color .2s;">
+          Home
+        </a>
+        <svg width="10" height="10" fill="none" stroke="#ccc" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        <a href="/blog/" style="display:flex;align-items:center;gap:0.4rem;color:#8B1A1A;text-decoration:none;font-size:0.82rem;font-weight:500;">
+          Blog
+        </a>
+        <svg width="10" height="10" fill="none" stroke="#ccc" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        <span style="font-size:0.82rem;color:#999;font-weight:400;">{post.data.title.length > 50 ? post.data.title.slice(0,50) + '...' : post.data.title}</span>
+        {post.data.date && (
+          <span style="font-size:0.8rem;color:#aaa;margin-left:auto;">
+            {new Date(post.data.date).toLocaleDateString('en-IN', { year:'numeric', month:'long', day:'numeric' })}
+          </span>
+        )}
+      </div>
+
+      <!-- Article Content -->
+      <article class="blog-article">
+        <Content />
+      </article>
+
+      <!-- Mid-Article CTA: Related Products -->
+      <div class="blog-cta-block">
+        <h3>Explore Related Stone Products</h3>
+        <p>Discover our curated selection of natural stone products relevant to this topic. Request samples or a custom consultation.</p>
+        <div class="btn-group">
+          {matchedLinks.slice(0, 3).map(link => (
+            <a href={link.href} class="btn-primary" style="font-size:0.72rem;padding:0.65rem 1.5rem;">{link.label}</a>
+          ))}
+        </div>
+      </div>
+
+      <!-- Bottom CTA: Contact -->
+      <div style="margin-top:3rem;padding:2.5rem;background:#1a1a1a;text-align:center;">
+        <span class="eyebrow" style="color:#c9a96e;">Need Expert Advice?</span>
+        <h3 style="font-family:'Libre Baskerville',serif;font-size:1.3rem;color:#fff;margin:0.5rem 0 0.75rem;">Get Free Stone Consultation from Our Experts</h3>
+        <p style="color:#aaa;margin:0 0 1.5rem;font-size:0.9rem;line-height:1.8;">Our team has 15+ years of experience helping architects, interior designers and homeowners choose the perfect stone.</p>
+        <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+          <a href="/contact-us/" class="btn-primary">Contact Us</a>
+          <a href="https://wa.link/af3e0f" target="_blank" rel="noopener noreferrer" class="btn-gold-outline">
+            WhatsApp Us
+          </a>
+        </div>
+      </div>
+
+      <!-- Related Pages Navigation -->
+      <div style="margin-top:2.5rem;padding:2rem 0;border-top:1px solid #eee;">
+        <h3 style="font-family:'Libre Baskerville',serif;font-size:1.1rem;color:#1a1a1a;margin:0 0 1.25rem;">Continue Exploring</h3>
+        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+          <a href="/application-area/" class="btn-outline" style="font-size:0.7rem;padding:0.55rem 1.25rem;">All Applications</a>
+          <a href="/our-collections/" class="btn-outline" style="font-size:0.7rem;padding:0.55rem 1.25rem;">All Collections</a>
+          <a href="/blog/" class="btn-outline" style="font-size:0.7rem;padding:0.55rem 1.25rem;">More Articles</a>
+          <a href="/catalogues/" class="btn-outline" style="font-size:0.7rem;padding:0.55rem 1.25rem;">Download Catalogues</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+  /* Unified hero - same as category pages */
+  .cat-hero { position: relative; height: 420px; overflow: hidden; }
+  .cat-hero img { width: 100%; height: 100%; object-fit: cover; }
+  .cat-hero__overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(139,26,26,0.8) 0%, rgba(26,26,26,0.7) 100%); z-index: 1; }
+  .cat-hero__content { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 2; text-align: center; padding: 0 1.5rem; }
+  .cat-hero__eyebrow { font-family: 'Jost', sans-serif; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: #c9a96e; margin-bottom: 0.75rem; }
+  .cat-hero__content h1 { font-family: 'Libre Baskerville', serif; font-size: clamp(1.5rem, 3.5vw, 2.5rem); color: #fff; font-weight: 700; line-height: 1.2; margin: 0; max-width: 720px; }
+  .cat-hero__rule { width: 50px; height: 3px; background: #c9a96e; margin: 1.25rem auto 0; }
+
+  /* Blog-specific article styling */
+  .blog-article {
+    font-family: 'Jost', sans-serif;
+    font-size: 1rem;
+    line-height: 1.85;
+    color: #444;
+  }
+  .blog-article :global(h2) {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.5rem;
+    color: #1a1a1a;
+    margin: 2.5rem 0 0.85rem;
+    line-height: 1.3;
+  }
+  .blog-article :global(h3) {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.2rem;
+    color: #1a1a1a;
+    margin: 2rem 0 0.65rem;
+    line-height: 1.35;
+  }
+  .blog-article :global(h4) {
+    font-family: 'Jost', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #2d2d2d;
+    margin: 1.5rem 0 0.5rem;
+  }
+  .blog-article :global(p) {
+    margin-bottom: 1.25rem;
+  }
+  .blog-article :global(a) {
+    color: #8B1A1A;
+    text-decoration: underline;
+    text-decoration-color: rgba(139,26,26,0.3);
+    transition: text-decoration-color 0.2s;
+  }
+  .blog-article :global(a:hover) {
+    text-decoration-color: #8B1A1A;
+  }
+  .blog-article :global(img) {
+    max-width: 100%;
+    height: auto;
+    margin: 1.5rem 0;
+    border-radius: 2px;
+    display: block;
+  }
+  .blog-article :global(ul),
+  .blog-article :global(ol) {
+    padding-left: 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+  .blog-article :global(li) {
+    margin-bottom: 0.5rem;
+  }
+  .blog-article :global(blockquote) {
+    border-left: 3px solid #8B1A1A;
+    padding-left: 1.25rem;
+    margin: 1.5rem 0;
+    color: #666;
+    font-style: italic;
+  }
+  .blog-article :global(strong) {
+    color: #1a1a1a;
+    font-weight: 700;
+  }
+  .blog-article :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+  }
+  .blog-article :global(th),
+  .blog-article :global(td) {
+    border: 1px solid #e8e2da;
+    padding: 0.65rem 1rem;
+    font-size: 0.9rem;
+    text-align: left;
+  }
+  .blog-article :global(th) {
+    background: #faf8f5;
+    font-weight: 700;
+    color: #1a1a1a;
+  }
+</style>

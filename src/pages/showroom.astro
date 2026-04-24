@@ -1,0 +1,198 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const title = "Showroom";
+const description = "Explore Stone World's exclusive showroom in Indore. Discover our premium collection of natural stones, crafted designs, and bespoke stone art installations.";
+
+const showroomImages = [
+  { src: "https://stoneworld.co.in/wp-content/uploads/2025/03/showroom-1.jpg", alt: "Stone World Showroom – Indore", wide: true },
+  { src: "https://stoneworld.co.in/wp-content/uploads/2025/03/b51195da95e83a099cc7043bb8110c6f-1.jpg", alt: "Natural Stone Display" },
+  { src: "https://stoneworld.co.in/wp-content/uploads/2026/01/5e04250e0d3708b6f04b0dcd881740c9.webp", alt: "Stone Craft Collection" },
+  { src: "https://stoneworld.co.in/wp-content/uploads/2025/03/83a8a5d58d3e48eb73d496d438276eca-1.jpg", alt: "Premium Stone Samples" },
+  { src: "https://stoneworld.co.in/wp-content/uploads/2025/03/c249b31ecbd9ccd8ed7e347f3b0ddc4c-1.jpg", alt: "Stone Interiors Gallery" },
+  { src: "https://stoneworld.co.in/wp-content/uploads/2025/03/bd10f5cc69fb802f6bbb49060d35c9ae-1.jpg", alt: "Handcrafted Stone Pieces" },
+  { src: "https://stoneworld.co.in/wp-content/uploads/2025/03/559eff297e26562e21343d08d272d2fa-1.jpg", alt: "Stone Craft Details" },
+  { src: "https://stoneworld.co.in/wp-content/uploads/2025/03/a7e6e1ff77ead0d28545459e01c0fc3e-1.jpg", alt: "Carved Stone Art", tall: true },
+  { src: "https://stoneworld.co.in/wp-content/uploads/2025/03/90235803df0dda3a51ca32d1fb9624df-1.jpg", alt: "Stone Mural Display" },
+  { src: "https://stoneworld.co.in/wp-content/uploads/2025/03/5342338476d1a2aff9eba7757b5c3a63-1.jpg", alt: "Showroom Interior" },
+  { src: "https://stoneworld.co.in/wp-content/uploads/2025/03/d19755a2a9d5947dc65149841fe58d69-1.jpg", alt: "Stone Cladding Samples" },
+  { src: "https://stoneworld.co.in/wp-content/uploads/2025/03/b11d915caf921b7e4235d46b7f131580-1.jpg", alt: "Natural Stone Textures" },
+  { src: "https://stoneworld.co.in/wp-content/uploads/2025/03/4f542511234d86b8fdc5ab7b17ea6b7e-1.jpg", alt: "Stone Veneers Collection" },
+  { src: "https://stoneworld.co.in/wp-content/uploads/2025/03/9287806e0e796d870c5ede7881f768e7-1.jpg", alt: "Premium Stone Installations" },
+  { src: "https://stoneworld.co.in/wp-content/uploads/2025/03/f9744527301004fbb994d75603cdd8c0-1.jpg", alt: "Stone Craft Showcase" },
+  { src: "https://stoneworld.co.in/wp-content/uploads/2025/03/8dbb84e15ca471435ebb7e3218b4587c-1.jpg", alt: "Luxury Stone Display" },
+  { src: "https://stoneworld.co.in/wp-content/uploads/2026/01/a524343d28490de4335e693dd3ed8087.webp", alt: "Stone Art Work" },
+  { src: "https://stoneworld.co.in/wp-content/uploads/2025/03/59f756bc04923965073f66ee5b2e77aa-1.jpg", alt: "Stone Jaali Design", tall: true },
+  { src: "https://stoneworld.co.in/wp-content/uploads/2025/03/100aef0d952a377ee57bca5789720d29-1.jpg", alt: "Stone Carvings Display", tall: true },
+  { src: "https://stoneworld.co.in/wp-content/uploads/2026/01/e15112c3940a621b1dc2a21d0c823089.webp", alt: "Stone Designs Gallery" },
+  { src: "https://stoneworld.co.in/wp-content/uploads/2026/01/5f5aea4308986f89065a1d7f0136f300.webp", alt: "Stone World Projects" },
+  { src: "https://stoneworld.co.in/wp-content/uploads/2025/03/6ccba6b99637693c3aeca91ea0789d5a-1.jpg", alt: "Stone Application Display" },
+  { src: "https://stoneworld.co.in/wp-content/uploads/2025/03/c0a3c21f95a44c8089401028600a2a12-1.jpg", alt: "Lift Lobby Stone Design" },
+  { src: "https://stoneworld.co.in/wp-content/uploads/2025/03/acd7ae4f8142c85b2018c376726570b8-1.jpg", alt: "Stone Feature Display", tall: true },
+  { src: "https://stoneworld.co.in/wp-content/uploads/2025/03/41ce3292c6e4c9f0b742dfda1b52e756-1.jpg", alt: "Lift Shaft Stone Cladding" },
+  { src: "https://stoneworld.co.in/wp-content/uploads/2025/03/afffc87051ae6b403cacb4c46d5a9b7c-1.jpg", alt: "Stone Wall Panels" },
+  { src: "https://stoneworld.co.in/wp-content/uploads/2025/03/7cb30766a509238b9f6f678af2a2acc7-1.jpg", alt: "Premium Wall Cladding" },
+  { src: "https://stoneworld.co.in/wp-content/uploads/2025/03/9b6d5caca9df47ac2b40aa94db7ec5cd-1.jpg", alt: "Stone Decor Pieces" },
+  { src: "https://stoneworld.co.in/wp-content/uploads/2026/01/e37d7a55c276a866b3982fb1fbbcbc25.webp", alt: "Stone Craft Art" },
+  { src: "https://stoneworld.co.in/wp-content/uploads/2025/03/bd50d6630aeca5ba8525657120605dc7-1.jpg", alt: "Stone Showroom Gallery" },
+  { src: "https://stoneworld.co.in/wp-content/uploads/2025/03/7b1d90d77b46a49f2e7c32a763ebe1e6-1.jpg", alt: "Handcrafted Stone Wall" },
+  { src: "https://stoneworld.co.in/wp-content/uploads/2025/03/e5ac3df9a68ab103fb05460dac661ad2-1.jpg", alt: "Natural Stone Interior" },
+  { src: "https://stoneworld.co.in/wp-content/uploads/2026/01/52290b63656645baaf4134e2fbaab78d.webp", alt: "Modern Stone Design" },
+  { src: "https://stoneworld.co.in/wp-content/uploads/2025/03/610b3000b1c3ac445e9889d57822bb29-1.jpg", alt: "Stone World Exclusives" },
+  { src: "https://stoneworld.co.in/wp-content/uploads/2026/01/7de09854da5a4eb95ab37a66530c11e1-1.webp", alt: "Stone Craft Detail" },
+  { src: "https://stoneworld.co.in/wp-content/uploads/2025/03/34c5e06dc50c9f58c023a6254e75356d-1.jpg", alt: "Stone Cladding Design" },
+  { src: "https://stoneworld.co.in/wp-content/uploads/2025/03/f9c53e313927ab5cb56adef59fec44e5-1.jpg", alt: "Stone Interior Showcase" },
+  { src: "https://stoneworld.co.in/wp-content/uploads/2025/03/7449334faac61edf9f68f0669e77ac6c-1.jpg", alt: "Premium Stone Application" },
+  { src: "https://stoneworld.co.in/wp-content/uploads/2025/03/43d599dc844fbe6c0799d33c630e8f68-1.jpg", alt: "Stone World Collection" },
+  { src: "https://stoneworld.co.in/wp-content/uploads/2026/01/f1d6118ce098f68f41fec2aac53fbc5c.webp", alt: "Artisan Stone Work" },
+  { src: "https://stoneworld.co.in/wp-content/uploads/2026/01/50b081e8e0d999e3728784467201f5e7.webp", alt: "Stone Display Showroom" },
+  { src: "https://stoneworld.co.in/wp-content/uploads/2026/01/f615532d2720110e7c1658431a5364ce.webp", alt: "Stone Craft Finish" },
+  { src: "https://stoneworld.co.in/wp-content/uploads/2026/01/23c67527905cab3f5bdfe1c74870e461.webp", alt: "Stone World Showroom View" },
+];
+---
+
+<Layout title={title} description={description}>
+
+<!-- Hero Banner -->
+<section class="cat-hero">
+  <div class="cat-hero__overlay"></div>
+  <img src={showroomImages[0].src} alt="Stone World Showroom – Indore" loading="eager" />
+  <div class="cat-hero__content">
+    <span class="cat-hero__eyebrow">Visit Us</span>
+    <h1>Our Showroom</h1>
+    <div class="cat-hero__rule"></div>
+    <p class="cat-hero__sub">Experience the beauty of natural stone at Central India's largest stone showroom</p>
+  </div>
+</section>
+
+<!-- Breadcrumb -->
+<nav class="cat-breadcrumb" aria-label="Breadcrumb">
+  <div class="container">
+    <a href="/">Home</a>
+    <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+    <span>Showroom</span>
+  </div>
+</nav>
+
+<!-- Intro Section -->
+<section style="max-width:900px;margin:0 auto;padding:2rem 1.5rem 3rem;text-align:center;">
+  <p style="font-family:'Jost',sans-serif;font-size:0.8rem;letter-spacing:0.15em;text-transform:uppercase;color:#8B1A1A;margin-bottom:0.5rem;">STONE WORLD SHOWROOM</p>
+  <h2 style="font-family:'Libre Baskerville',serif;font-size:2rem;color:#1a1a1a;margin:0 0 1rem;">Where Craftsmanship Meets Inspiration</h2>
+  <p style="font-family:'Jost',sans-serif;font-size:1rem;color:#555;line-height:1.8;max-width:700px;margin:0 auto;">
+    Step into Stone World's showroom in Indore to explore our complete range of natural stone products, handcrafted artefacts, stone murals, CNC-carved designs, and bespoke installations. Each piece tells a story of artisanal excellence.
+  </p>
+</section>
+
+<!-- Masonry Gallery -->
+<section class="showroom-gallery">
+  <div class="gallery-grid">
+    {showroomImages.slice(1).map((img, i) => (
+      <div class={`gallery-item ${img.tall ? 'gallery-item--tall' : ''} ${img.wide ? 'gallery-item--wide' : ''}`}>
+        <img src={img.src} alt={img.alt} loading="lazy" />
+        <div class="gallery-item__overlay">
+          <span>{img.alt}</span>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<!-- Location CTA -->
+<section style="background:#f5f0eb;padding:4rem 1.5rem;margin-top:3rem;">
+  <div style="max-width:900px;margin:0 auto;text-align:center;">
+    <p style="font-family:'Jost',sans-serif;font-size:0.8rem;letter-spacing:0.15em;text-transform:uppercase;color:#8B1A1A;margin-bottom:0.5rem;">VISIT OUR SHOWROOM</p>
+    <h2 style="font-family:'Libre Baskerville',serif;font-size:1.8rem;color:#1a1a1a;margin:0 0 1rem;">Plan Your Visit</h2>
+    <p style="font-family:'Jost',sans-serif;color:#555;margin:0 0 0.5rem;">
+      <strong>Address:</strong> 108-FB, Scheme No 94, Near Arpit Hospital, Ring Road, Near Pipliyahana Square, Indore, M.P. – 452018
+    </p>
+    <p style="font-family:'Jost',sans-serif;color:#555;margin:0 0 0.5rem;">
+      <strong>Phone:</strong> <a href="tel:+916267967059" style="color:#8B1A1A;">+91 6267967059</a>
+    </p>
+    <p style="font-family:'Jost',sans-serif;color:#555;margin:0 0 1.5rem;">
+      <strong>Email:</strong> <a href="mailto:stoneworld.ind@gmail.com" style="color:#8B1A1A;">stoneworld.ind@gmail.com</a>
+    </p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <a href="https://www.google.com/maps/place/Stone+World/@22.7117609,75.9042713,17z" target="_blank" rel="noopener" class="btn-primary" style="display:inline-block;padding:0.75rem 2rem;background:#8B1A1A !important;color:#fff !important;font-family:'Jost',sans-serif;font-weight:600;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;transition:all .3s;">
+        Get Directions
+      </a>
+      <a href="/contact-us/" class="btn-outline" style="display:inline-block;padding:0.75rem 2rem;border:2px solid #8B1A1A !important;color:#8B1A1A !important;font-family:'Jost',sans-serif;font-weight:600;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;background:transparent !important;transition:all .3s;">
+        Book Consultation
+      </a>
+    </div>
+  </div>
+</section>
+
+</Layout>
+
+<style>
+/* Legacy showroom hero styles removed - now uses global .cat-hero */
+
+/* Gallery Grid */
+.showroom-gallery {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+}
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  aspect-ratio: 3/2;
+  transition: transform 0.5s ease;
+}
+.gallery-item--tall img {
+  aspect-ratio: 2/3;
+}
+.gallery-item--tall {
+  grid-row: span 2;
+}
+.gallery-item--wide {
+  grid-column: span 2;
+}
+.gallery-item__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(139,26,26,0.8) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  display: flex;
+  align-items: flex-end;
+  padding: 1rem;
+}
+.gallery-item__overlay span {
+  font-family: 'Jost', sans-serif;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+.gallery-item:hover .gallery-item__overlay {
+  opacity: 1;
+}
+.gallery-item:hover img {
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>

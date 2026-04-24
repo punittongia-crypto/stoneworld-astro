@@ -1,0 +1,153 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  type?: string;
+  schema?: object;
+  canonical?: string;
+}
+
+const {
+  title,
+  description = "Stone World is India's trusted manufacturer & exporter of premium Indian natural stone products. Serving architects, interior designers & homeowners since 2008.",
+  image = "https://stoneworld.co.in/wp-content/uploads/2025/03/slider-1.jpg",
+  type = "website",
+  schema,
+  canonical
+} = Astro.props;
+
+const pageUrl = canonical || `https://stoneworld.co.in${Astro.url.pathname}`;
+
+// Default Organization schema always present
+const orgSchema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": "https://stoneworld.co.in/#organization",
+  "name": "Stone World",
+  "url": "https://stoneworld.co.in",
+  "logo": "https://stoneworld.co.in/images/logo-header.png",
+  "image": image,
+  "description": "India's premier natural stone supplier. Specialists in marble, granite, limestone, quartzite, slate, and custom stone crafts for architects and interior designers.",
+  "foundingDate": "2008",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "108-FB, Scheme No 94, Near Arpit Hospital, Ring Road",
+    "addressLocality": "Indore",
+    "addressRegion": "Madhya Pradesh",
+    "postalCode": "452018",
+    "addressCountry": "IN"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 22.7117609,
+    "longitude": 75.9042713
+  },
+  "telephone": "+916267967059",
+  "email": "stoneworld.ind@gmail.com",
+  "sameAs": [
+    "https://www.facebook.com/profile.php?id=100065373913876",
+    "https://www.instagram.com/the.stone.world/",
+    "https://pinterest.com/stoneworldindia/",
+    "https://www.youtube.com/channel/UCMos6wmfNwuL939Ed8ilnBQ"
+  ],
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+    "opens": "10:00",
+    "closes": "19:00"
+  },
+  "priceRange": "₹₹₹",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Natural Stone Products",
+    "itemListElement": [
+      { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Natural Stone Tiles & Slabs" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Stone Facade Cladding" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Custom Stone Crafts & Artefacts" } }
+    ]
+  }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "name": "Home",
+    "item": "https://stoneworld.co.in/"
+  }]
+};
+
+const schemas = [orgSchema, breadcrumbSchema];
+if (schema) schemas.push(schema as any);
+---
+
+<!doctype html>
+<html lang="en-IN" itemscope itemtype="https://schema.org/WebPage">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- SEO Core -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={pageUrl} />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+
+    <!-- GEO Tags for Local SEO -->
+    <meta name="geo.region" content="IN-MP" />
+    <meta name="geo.placename" content="Indore" />
+    <meta name="geo.position" content="22.7117609;75.9042713" />
+    <meta name="ICBM" content="22.7117609, 75.9042713" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={pageUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Stone World" />
+    <meta property="og:locale" content="en_IN" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Generator -->
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Structured Data JSON-LD -->
+    {schemas.map(s => (
+      <script type="application/ld+json" set:html={JSON.stringify(s)} />
+    ))}
+  </head>
+
+  <body>
+    <Header />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

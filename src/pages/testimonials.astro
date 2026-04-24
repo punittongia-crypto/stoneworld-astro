@@ -1,0 +1,118 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const testimonials = [
+  {
+    name: "Ajay Bhatia",
+    role: "Interior Designer, Indore",
+    text: "Stone World is a one-stop shop for all natural stone requirements. Their team is very professional and their variety of products is unmatched.",
+    rating: 5
+  },
+  {
+    name: "Shilpa Jain",
+    role: "Homeowner, Bhopal",
+    text: "We redesigned our entire home with Stone World's products. The quality is exceptional and the live concept displays in their showroom made it very easy to visualize the final result.",
+    rating: 5
+  },
+  {
+    name: "Rajkumar Singhania",
+    role: "Architect, Mumbai",
+    text: "I've been recommending Stone World to all my clients. Their unique designs and quality craftsmanship are unparalleled in the industry.",
+    rating: 5
+  },
+  {
+    name: "Priya Sharma",
+    role: "Interior Designer, Bangalore",
+    text: "The variety at Stone World is amazing. I found exactly what I was looking for – premium natural stones at competitive prices. Highly recommended!",
+    rating: 5
+  },
+  {
+    name: "Vishal Mehta",
+    role: "Hotel Owner, Delhi",
+    text: "Stone World supplied us with beautiful stone cladding and flooring for our boutique hotel project. Their team was responsive, professional, and delivered on time.",
+    rating: 5
+  },
+  {
+    name: "Anita Kapoor",
+    role: "Residential Client, Indore",
+    text: "Excellent service from start to finish. The stone products we purchased are of superb quality and have transformed our home completely. Very satisfied!",
+    rating: 5
+  },
+];
+---
+
+<Layout
+  title="Testimonials | Stone World - What Our Clients Say"
+  description="Hear what our satisfied clients have to say about Stone World's natural stone products and custom design services.">
+
+  <!-- HERO BANNER -->
+  <section class="cat-hero">
+    <div class="cat-hero__overlay"></div>
+    <img src="/wp-content/uploads/2025/03/inner-banner1.jpg" alt="Stone World Testimonials" loading="eager" />
+    <div class="cat-hero__content">
+      <span class="cat-hero__eyebrow">Client Stories</span>
+      <h1>Testimonials</h1>
+      <div class="cat-hero__rule"></div>
+      <p class="cat-hero__sub">Hear from the architects, designers and homeowners who trust Stone World</p>
+    </div>
+  </section>
+
+  <!-- BREADCRUMB -->
+  <nav class="cat-breadcrumb" aria-label="Breadcrumb">
+    <div class="container" style="display:flex;align-items:center;gap:0.5rem;font-family:'Jost',sans-serif;font-size:0.8rem;color:#999;">
+      <a href="/" style="color:#8B1A1A;text-decoration:none;">Home</a>
+      <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      <span>Testimonials</span>
+    </div>
+  </nav>
+
+  <!-- Testimonials Grid -->
+  <section style="padding:5rem 0;background:#fff;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 1.5rem;">
+      <div style="text-align:center;margin-bottom:3.5rem;">
+        <h2 class="section-title">What Our Clients Say</h2>
+        <p class="section-subtitle">Hear from the architects, designers and homeowners who have transformed their spaces with Stone World.</p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:2rem;">
+        {testimonials.map(t => (
+          <div style="padding:2rem;border:1px solid #efefef;position:relative;transition:box-shadow .3s,border-color .3s;"
+               onmouseover="this.style.boxShadow='0 6px 24px rgba(0,0,0,0.1)';this.style.borderColor='#c9a96e'" onmouseout="this.style.boxShadow='none';this.style.borderColor='#efefef'">
+            <!-- Quote icon -->
+            <div style="position:absolute;top:1.5rem;right:1.5rem;opacity:0.1;">
+              <svg width="40" height="40" fill="#c9a96e" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+            </div>
+
+            <!-- Stars -->
+            <div style="display:flex;gap:2px;margin-bottom:1rem;">
+              {Array(t.rating).fill(0).map(() => (
+                <svg width="16" height="16" fill="#c9a96e" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              ))}
+            </div>
+
+            <p style="color:#555;line-height:1.85;font-size:0.925rem;margin:0 0 1.5rem;font-style:italic;">"{t.text}"</p>
+
+            <div style="display:flex;align-items:center;gap:0.75rem;padding-top:1.25rem;border-top:1px solid #f0f0f0;">
+              <div style="width:42px;height:42px;border-radius:50%;background:#c9a96e;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <span style="font-family:'Libre Baskerville',serif;font-size:1.1rem;font-weight:700;color:#fff;">{t.name.charAt(0)}</span>
+              </div>
+              <div>
+                <p style="font-weight:700;font-size:0.9rem;color:#1a1a1a;margin:0;">{t.name}</p>
+                <p style="font-size:0.8rem;color:#c9a96e;margin:0.15rem 0 0;">{t.role}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="padding:4rem 1.5rem;background:#fafaf8;text-align:center;">
+    <h2 style="font-family:'Libre Baskerville',serif;font-size:1.75rem;color:#1a1a1a;margin:0 0 0.75rem;">Ready to Transform Your Space?</h2>
+    <p style="color:#666;margin:0 auto 1.75rem;max-width:480px;">Join hundreds of satisfied customers who have trusted Stone World for their natural stone projects.</p>
+    <a href="/contact-us/" class="btn-primary" style="margin-right:1rem;">Contact Us</a>
+    <a href="https://wa.link/af3e0f" target="_blank" rel="noopener" class="btn-outline">Enquire on WhatsApp</a>
+  </section>
+
+</Layout>

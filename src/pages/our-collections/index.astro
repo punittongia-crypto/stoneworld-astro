@@ -1,0 +1,165 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const collections = [
+  { title: 'CNC Carved Stone Designs', slug: 'cnc-carved-stone-designs', img: '/wp-content/uploads/2025/03/slider-1.jpg' },
+  { title: 'Hand Crafted Stone Murals', slug: 'hand-crafted-stone-murals', img: '/wp-content/uploads/2025/03/slider-3.jpg' },
+  { title: 'Natural Stone Claddings', slug: 'natural-stone-claddings', img: '/wp-content/uploads/2025/08/Modern-Interior-Wall-Cladding.jpg' },
+  { title: 'Brick Claddings', slug: 'brick-claddings', img: '/wp-content/uploads/2025/03/slider-2.jpg' },
+  { title: 'Antique Boat Wood Claddings', slug: 'antique-boat-wood-claddings', img: '/wp-content/uploads/2025/03/slider-4.jpg' },
+  { title: 'Hand Cut Carpet Mosaics', slug: 'hand-cut-carpet-mosaics', img: '/wp-content/uploads/2025/03/FLR-4.jpg' },
+  { title: 'Gold Leafing on Stones', slug: 'gold-leafing-on-stones', img: '/wp-content/uploads/2025/08/gold-leafing.webp' },
+  { title: 'Stone Jaalies', slug: 'stone-jaalies', img: '/wp-content/uploads/2025/03/LC-2.jpeg' },
+  { title: 'Gem Stones', slug: 'gemstones', img: '/wp-content/uploads/2025/03/FP-15.jpg' },
+  { title: 'Stone Inlays', slug: 'stone-inlays', img: '/wp-content/uploads/2025/03/slider-1.jpg' },
+  { title: 'Bamboo Wash Basins', slug: 'bamboo-wash-basins', img: '/wp-content/uploads/2025/03/KCT-1.jpg' },
+  { title: 'Granite Stone', slug: 'granite-stone', img: '/wp-content/uploads/2025/09/Granite-Stone-Flooring_11zon.jpg' },
+  { title: 'Raw Ceramic Jaalis', slug: 'raw-ceramic-jaalis', img: '/wp-content/uploads/2025/03/MNDR-2.jpg' },
+  { title: 'Slate Murals', slug: 'slate-murals', img: '/wp-content/uploads/2025/03/FP-15.jpg' },
+  { title: 'Stone Artefacts', slug: 'stone-artefacts', img: '/wp-content/uploads/2025/03/ARTEFACTS-14.jpeg' },
+  { title: 'Stone Veneers', slug: 'stone-veneers', img: '/wp-content/uploads/2025/03/slider-2.jpg' },
+  { title: 'Wall & Floor Highlighters', slug: 'wall-floor-highlighters', img: '/wp-content/uploads/2025/03/FLR-4.jpg' },
+  { title: 'Wash Basins', slug: 'wash-basins', img: '/wp-content/uploads/2025/03/KCT-1.jpg' },
+];
+---
+
+<Layout
+  title="Explore Stone Collection For Your Home Decor | Stone World"
+  description="Explore the finest stone collection for your home decor at Stone World. Find unique textures, natural finishes, and timeless designs for every living space.">
+
+  <!-- HERO BANNER -->
+  <section class="cat-hero">
+    <div class="cat-hero__overlay"></div>
+    <img src="/wp-content/uploads/2025/03/inner-banner1.jpg" alt="Stone World Collections" loading="eager" />
+    <div class="cat-hero__content">
+      <span class="cat-hero__eyebrow">Curated</span>
+      <h1>Our Collections</h1>
+      <div class="cat-hero__rule"></div>
+      <p class="cat-hero__sub">Hand-selected stone collections for architects, designers and discerning homeowners</p>
+    </div>
+  </section>
+
+  <!-- BREADCRUMB -->
+  <nav class="cat-breadcrumb" aria-label="Breadcrumb">
+    <div class="container">
+      <a href="/">Home</a>
+      <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      <span>Our Collections</span>
+    </div>
+  </nav>
+
+  <!-- INTRO -->
+  <section class="cat-intro">
+    <div class="container text-center">
+      <span class="eyebrow">Exclusive Range</span>
+      <h2 class="section-title">Have a Look at Our Collections</h2>
+      <span class="gold-rule gold-rule--center"></span>
+      <p class="section-subtitle">Our curated portfolio includes the finest range of natural stone products, handcrafted murals, CNC-carved designs, and artisan stone pieces for walls and floors.</p>
+    </div>
+  </section>
+
+  <!-- PREMIUM CARD GRID -->
+  <section class="cat-grid-section">
+    <div class="container">
+      <div class="cat-grid">
+        {collections.map((col, i) => (
+          <a href={`/our-collections/${col.slug}/`}
+             class={`cat-card ${i % 3 === 1 ? 'cat-card--offset' : ''}`}
+             id={`col-card-${col.slug}`}>
+            <div class="cat-card__img">
+              <img src={col.img} alt={col.title} loading="lazy" />
+            </div>
+            <div class="cat-card__overlay">
+              <div class="cat-card__overlay-inner">
+                <h3>{col.title}</h3>
+                <span class="cat-card__cta">View More <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></span>
+              </div>
+            </div>
+            <div class="cat-card__body">
+              <h3 class="cat-card__title">{col.title}</h3>
+              <span class="cat-card__link">View More <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg></span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA STRIP -->
+  <section class="cat-cta">
+    <div class="container text-center">
+      <span class="cat-cta__eyebrow">Interested in Our Collections?</span>
+      <h2 class="cat-cta__heading">Request Samples or a Custom Quote</h2>
+      <p class="cat-cta__sub">Get in touch with our experts for material consultation, physical samples and competitive pricing on any collection.</p>
+      <div class="cat-cta__btns">
+        <a href="/contact-us/" class="btn-primary">Request Samples</a>
+        <a href="https://wa.link/af3e0f" target="_blank" rel="noopener noreferrer" class="btn-gold-outline">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          WhatsApp Us
+        </a>
+      </div>
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+/* Reusing the same category page design system as Application Area */
+.cat-hero { position: relative; height: 520px; overflow: hidden; }
+.cat-hero img { width: 100%; height: 100%; object-fit: cover; }
+.cat-hero__overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(139,26,26,0.75) 0%, rgba(26,26,26,0.65) 100%); z-index: 1; }
+.cat-hero__content { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 2; text-align: center; padding: 0 1.5rem; }
+.cat-hero__eyebrow { font-family: 'Jost', sans-serif; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: #c9a96e; margin-bottom: 0.75rem; }
+.cat-hero__content h1 { font-family: 'Libre Baskerville', serif; font-size: clamp(2.25rem, 5vw, 4rem); color: #fff; font-weight: 700; line-height: 1.15; margin: 0; }
+.cat-hero__rule { width: 60px; height: 3px; background: #c9a96e; margin: 1.25rem auto; }
+.cat-hero__sub { font-family: 'Jost', sans-serif; color: rgba(255,255,255,0.75); font-size: 1rem; max-width: 480px; margin: 0; }
+
+.cat-breadcrumb { background: #fff; border-bottom: 1px solid #eee; padding: 0.75rem 0; }
+.cat-breadcrumb .container { display: flex; align-items: center; gap: 0.5rem; font-family: 'Jost', sans-serif; font-size: 0.8rem; color: #999; }
+.cat-breadcrumb a { color: #8B1A1A; text-decoration: none; transition: opacity 0.2s; }
+.cat-breadcrumb a:hover { opacity: 0.7; }
+
+.cat-intro { padding: 4.5rem 0 1rem; background: #fafaf8; }
+
+.cat-grid-section { padding: 3rem 0 6rem; background: #fafaf8; }
+.cat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+
+.cat-card { display: block; text-decoration: none; position: relative; overflow: hidden; background: #fff; transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.5s; }
+.cat-card:hover { transform: translateY(-6px); box-shadow: 0 24px 64px rgba(139,26,26,0.12); }
+.cat-card--offset { margin-top: 3rem; }
+
+.cat-card__img { position: relative; overflow: hidden; aspect-ratio: 3/4; }
+.cat-card__img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94); }
+.cat-card:hover .cat-card__img img { transform: scale(1.08); }
+
+.cat-card__overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(139,26,26,0.85) 0%, rgba(105,0,8,0) 55%); opacity: 0; transition: opacity 0.5s; display: flex; align-items: flex-end; z-index: 2; }
+.cat-card:hover .cat-card__overlay { opacity: 1; }
+.cat-card__overlay-inner { padding: 2rem; width: 100%; display: flex; justify-content: space-between; align-items: flex-end; }
+.cat-card__overlay-inner h3 { font-family: 'Libre Baskerville', serif; font-size: 1.5rem; color: #fff; font-weight: 700; margin: 0; }
+.cat-card__cta { font-family: 'Jost', sans-serif; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: #c9a96e; display: flex; align-items: center; gap: 0.3rem; white-space: nowrap; }
+
+.cat-card__body { padding: 1.15rem 1.5rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; border-bottom: 2px solid transparent; transition: border-color 0.4s; }
+.cat-card:hover .cat-card__body { border-bottom-color: #8B1A1A; }
+.cat-card__title { font-family: 'Libre Baskerville', serif; font-size: 0.9rem; font-weight: 700; color: #1a1a1a; margin: 0; flex: 1; min-width: 0; }
+.cat-card__link { font-family: 'Jost', sans-serif; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #8B1A1A; display: flex; align-items: center; gap: 0.3rem; white-space: nowrap; transition: gap 0.3s, color 0.3s; flex-shrink: 0; }
+.cat-card:hover .cat-card__link { gap: 0.55rem; color: #c9a96e; }
+
+.cat-cta { background: #1a1a1a; padding: 5.5rem 1.5rem; }
+.cat-cta__eyebrow { font-family: 'Jost', sans-serif; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: #c9a96e; display: block; margin-bottom: 0.75rem; }
+.cat-cta__heading { font-family: 'Libre Baskerville', serif; font-size: clamp(1.6rem, 3vw, 2.5rem); color: #fff; margin: 0 0 1rem; font-weight: 700; }
+.cat-cta__sub { font-family: 'Jost', sans-serif; color: #999; max-width: 520px; margin: 0 auto 2.25rem; line-height: 1.8; }
+.cat-cta__btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+@media (max-width: 1024px) {
+  .cat-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+  .cat-card--offset { margin-top: 2rem; }
+  .cat-hero { height: 420px; }
+}
+@media (max-width: 640px) {
+  .cat-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+  .cat-card--offset { margin-top: 0; }
+  .cat-hero { height: 340px; }
+  .cat-card__img { aspect-ratio: 4/3; }
+  .cat-cta { padding: 3.5rem 1.5rem; }
+}
+</style>

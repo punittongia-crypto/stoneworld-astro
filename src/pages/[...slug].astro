@@ -1,0 +1,41 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const pages = await getCollection('pages');
+  
+  return pages.map((page) => ({
+    params: { 
+      slug: page.data.slug === 'home' ? undefined : page.data.slug 
+    },
+    props: { page },
+  }));
+}
+
+const { page } = Astro.props;
+const { Content } = await render(page);
+---
+
+<Layout title={page.data.title} description={page.data.description}>
+  <!-- 
+    Note: This renders the raw HTML extracted from WordPress. 
+    To achieve the pixel-perfect Tailwind migration, this content should eventually 
+    be rewritten using Astro/Tailwind components.
+  -->
+  <div class="prose max-w-7xl mx-auto px-4 py-12 wp-content">
+    <h1 class="text-4xl font-bold mb-8">{page.data.title}</h1>
+    <Content />
+  </div>
+</Layout>
+
+<style is:global>
+  /* Basic resets for WordPress content */
+  .wp-content img {
+    max-width: 100%;
+    height: auto;
+  }
+  .wp-content .elementor-section {
+    width: 100%;
+  }
+</style>

@@ -1,0 +1,325 @@
+---
+import Layout from '../layouts/Layout.astro';
+import imgs from '../data/featuredImages.json';
+
+function local(url: string) {
+  return url.replace('https://stoneworld.co.in', '');
+}
+
+const applicationAreas = [
+  { title: 'Facade', slug: 'facade', img: local(imgs['facade']) },
+  { title: 'Fireplace', slug: 'fireplace', img: local(imgs['fireplace']) },
+  { title: 'Floor', slug: 'floor', img: local(imgs['floor']) },
+  { title: 'Landscape', slug: 'landscape', img: local(imgs['landscape']) },
+  { title: 'Lift Cladding', slug: 'lift-cladding', img: local(imgs['lift-cladding']) },
+  { title: 'Mandir', slug: 'stone-mandir', img: local(imgs['stone-mandir']) },
+  { title: 'Name Plate', slug: 'stone-name-plate', img: local(imgs['stone-name-plate']) },
+  { title: 'Parking', slug: 'parking', img: local(imgs['parking']) },
+  { title: 'Partition Wall', slug: 'partition-wall', img: local(imgs['partition-wall']) },
+  { title: 'Staircase', slug: 'staircase', img: local(imgs['staircase']) },
+  { title: 'Stone Artefacts', slug: 'stone-artefacts', img: local(imgs['stone-artefacts']) },
+  { title: 'Swimming Pool Deck', slug: 'swimming-pool-deck', img: local(imgs['swimming-pool-deck']) },
+  { title: 'Wash Basin', slug: 'wash-basin', img: local(imgs['wash-basin']) },
+  { title: 'Water Body', slug: 'water-body', img: local(imgs['water-body']) },
+  { title: 'Bar Counter', slug: 'bar-counter', img: local(imgs['bar-counter']) },
+  { title: 'Bathroom', slug: 'bathroom', img: local(imgs['bathroom']) },
+  { title: 'Dining Table', slug: 'dining-table', img: local(imgs['dining-table']) },
+  { title: 'Drawing Room', slug: 'drawing-room', img: local(imgs['drawing-room']) },
+];
+
+
+const collections = [
+  { title: 'Brick Claddings', slug: 'brick-claddings', img: local(imgs['brick-claddings']) },
+  { title: 'Antique Boat Wood Claddings', slug: 'antique-boat-wood-claddings', img: local(imgs['antique-boat-wood-claddings']) },
+  { title: 'CNC Carved Stone Designs', slug: 'cnc-carved-stone-designs', img: local(imgs['cnc-carved-stone-designs']) },
+  { title: 'Bamboo Wash Basins', slug: 'bamboo-wash-basins', img: local(imgs['bamboo-wash-basins']) },
+  { title: 'Gem Stones', slug: 'gemstones', img: local(imgs['gemstones']) },
+  { title: 'Gold Leafing on Stones', slug: 'gold-leafing-on-stones', img: local(imgs['gold-leafing-on-stones']) },
+];
+
+const homeSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Stone World — Indian Natural Stone & Crafts Supplier",
+  "url": "https://stoneworld.co.in/",
+  "description": "India's premier natural stone supplier for architects, interior designers and homeowners. Marble, granite, quartzite, slate, limestone & custom stone crafts.",
+  "publisher": { "@id": "https://stoneworld.co.in/#organization" }
+};
+---
+
+<Layout
+  title="Indian Natural Stone & Crafts Supplier — Stone World Indore"
+  description="Stone World is India's leading manufacturer & supplier of premium natural stone. Explore 20+ stone applications and 19+ exclusive collections for architects, designers & homeowners."
+  schema={homeSchema}>
+
+  <!-- ============ HERO SLIDER ============ -->
+  <section id="hero-slider" aria-label="Featured Projects" style="position:relative;width:100%;height:min(88vh,700px);overflow:hidden;">
+    {[
+      { img: '/wp-content/uploads/2025/03/slider-1.jpg', tag: 'Innovation Meets Artistry', heading: 'Crafting Excellence with Indian Natural Stones' },
+      { img: '/wp-content/uploads/2025/03/slider-2.jpg', tag: 'Premium Stone Supplier', heading: 'Transforming Spaces with Natural Beauty' },
+      { img: '/wp-content/uploads/2025/03/slider-3.jpg', tag: 'For Architects & Designers', heading: 'Your Vision. Our Mastery in Stone.' },
+      { img: '/wp-content/uploads/2025/03/slider-4.jpg', tag: 'Founded in 2008', heading: "India's Leading Natural Stone Craftsmen" },
+    ].map((slide, i) => (
+      <div class="hero-slide" data-index={i}
+           style={`position:absolute;inset:0;opacity:${i===0?1:0};transition:opacity 1.2s ease;background:url('${slide.img}') center/cover no-repeat;`}>
+        <div style="position:absolute;inset:0;background:linear-gradient(105deg,rgba(0,0,0,0.72) 0%,rgba(0,0,0,0.2) 100%);"></div>
+        <div style="position:relative;z-index:2;height:100%;display:flex;align-items:center;">
+          <div class="container">
+            <p class="eyebrow" style="color:#c9a96e;font-size:0.74rem;">{slide.tag}</p>
+            <h1 style="font-family:'Libre Baskerville',serif;font-size:clamp(2rem,4.5vw,3.6rem);color:#fff;max-width:660px;line-height:1.22;margin:0 0 2rem;">{slide.heading}</h1>
+            <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+              <a href="/contact-us/" class="btn-primary">Get In Touch</a>
+              <a href="/application-area/" class="btn-outline--light btn-outline">Explore Applications</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    ))}
+    <!-- Dots -->
+    <div style="position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;gap:0.5rem;z-index:10;">
+      {[0,1,2,3].map(i => (
+        <button class="hero-dot" data-dot={i} aria-label={`Slide ${i+1}`}
+          style={`width:10px;height:10px;border-radius:50%;border:none;cursor:pointer;background:${i===0?'#8B1A1A':'rgba(255,255,255,0.35)'};transition:background .3s,transform .3s;padding:0;`}></button>
+      ))}
+    </div>
+    <button id="hero-prev" aria-label="Previous slide" style="position:absolute;left:1.5rem;top:50%;transform:translateY(-50%);z-index:10;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.3);backdrop-filter:blur(4px);color:#fff;width:48px;height:48px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s,border-color .2s;" onmouseover="this.style.background='rgba(201,169,110,0.9)';this.style.borderColor='#c9a96e';" onmouseout="this.style.background='rgba(255,255,255,0.12)';this.style.borderColor='rgba(255,255,255,0.3)';">
+      <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+    </button>
+    <button id="hero-next" aria-label="Next slide" style="position:absolute;right:1.5rem;top:50%;transform:translateY(-50%);z-index:10;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.3);backdrop-filter:blur(4px);color:#fff;width:48px;height:48px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s,border-color .2s;" onmouseover="this.style.background='rgba(201,169,110,0.9)';this.style.borderColor='#c9a96e';" onmouseout="this.style.background='rgba(255,255,255,0.12)';this.style.borderColor='rgba(255,255,255,0.3)';">
+      <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+    </button>
+  </section>
+
+  <!-- ============ STATS BAND ============ -->
+  <section style="background:#8B1A1A;padding:2.5rem 0;">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);">
+        {[
+          { num: '15+', label: 'Years of Excellence' },
+          { num: '500+', label: 'Projects Delivered' },
+          { num: '20+', label: 'Stone Applications' },
+          { num: '1000+', label: 'Happy Clients' },
+        ].map(s => (
+          <div class="stat-box">
+            <span class="stat-number">{s.num}</span>
+            <span class="stat-label">{s.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ APPLICATION AREAS ============ -->
+  <section class="section-pad" style="background:#fafaf8;">
+    <div class="container">
+      <div class="text-center" style="margin-bottom:3.5rem;">
+        <span class="eyebrow">Stone Application Areas</span>
+        <h2 class="section-title">Premium Indian Natural Stone<br>Products & Crafts</h2>
+        <p class="section-subtitle">Explore conceptual designs, 3D renders and live project photos to see how natural stone can transform any space.</p>
+      </div>
+      <div class="card-grid">
+        {applicationAreas.map(area => (
+          <article class="stone-card" itemscope itemtype="https://schema.org/Product">
+            <div class="stone-card__img-wrap">
+              <img src={area.img} alt={`Natural stone ${area.title.toLowerCase()} design ideas`} loading="lazy" itemprop="image" />
+            </div>
+            <div class="stone-card__body">
+              <h3 class="stone-card__title" itemprop="name">{area.title}</h3>
+              <a href={`/application-area/${area.slug}/`} class="stone-card__link" aria-label={`View ${area.title} projects`}>
+                View More
+                <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+      <div class="text-center" style="margin-top:3rem;">
+        <a href="/application-area/" class="btn-outline">View All Applications</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHY CHOOSE US ============ -->
+  <section class="section-pad" style="background:#fff;">
+    <div class="container">
+      <div class="text-center" style="margin-bottom:3.5rem;">
+        <span class="eyebrow">Why Stone World</span>
+        <h2 class="section-title">The Preferred Choice of Architects<br>& Interior Designers</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.75rem;">
+        {[
+          { icon: '◈', title: 'Premium Stone Selection', desc: 'Curated from the finest quarries across India — marble, granite, quartzite, limestone, slate and more.' },
+          { icon: '◎', title: 'Custom Design Expertise', desc: 'From CNC engravings to hand-carved murals, we craft bespoke stone solutions for every project.' },
+          { icon: '◇', title: 'Architect & Designer Ready', desc: 'Technical specs, samples and consultation support tailored for professionals. Pan-India delivery.' },
+          { icon: '◉', title: 'Quality Guaranteed', desc: 'Every stone is hand-selected and quality-checked. Our craftsmanship has stood the test of time since 2008.' },
+        ].map(f => (
+          <div class="feature-box">
+            <div class="feature-icon">
+              <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <h3>{f.title}</h3>
+            <span class="gold-rule"></span>
+            <p>{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COLLECTIONS ============ -->
+  <section class="section-pad" style="background:#fafaf8;">
+    <div class="container">
+      <div class="text-center" style="margin-bottom:3.5rem;">
+        <span class="eyebrow">Our Collections</span>
+        <h2 class="section-title">Have a Look at Our Collections</h2>
+        <p class="section-subtitle">An exclusive range of stone and home décor products for walls, floors, and bespoke installations.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;">
+        {collections.map((col, i) => (
+          <a href={`/our-collections/${col.slug}/`} class="gallery-card" aria-label={`View ${col.title} collection`} style={i === 0 ? 'grid-row:span 2;aspect-ratio:auto;' : ''}>
+            <img src={col.img} alt={col.title} loading="lazy" style={i === 0 ? 'height:100%;' : ''} />
+            <div class="gallery-card__overlay">
+              <div>
+                <p class="gallery-card__name">{col.title}</p>
+                <span style="font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:#c9a96e;font-weight:600;">View Collection →</span>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+      <div class="text-center" style="margin-top:3rem;">
+        <a href="/our-collections/" class="btn-outline">View All Collections</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CATALOGUE BANNER ============ -->
+  <section style="position:relative;padding:6rem 1.5rem;background:url('/wp-content/uploads/2025/03/inner-banner1.jpg') center/cover no-repeat;text-align:center;">
+    <div style="position:absolute;inset:0;background:rgba(0,0,0,0.65);"></div>
+    <div style="position:relative;z-index:1;">
+      <span class="eyebrow">Free Download</span>
+      <h2 style="font-family:'Libre Baskerville',serif;font-size:clamp(1.75rem,3vw,2.5rem);color:#fff;margin:0 0 1rem;">Download Our Design & Product Catalogues</h2>
+      <p style="color:#bbb;font-size:0.95rem;max-width:500px;margin:0 auto 2rem;line-height:1.8;">Showcasing our cutting-edge innovative designs in the form of digital catalogues.</p>
+      <a href="/catalogues/" class="btn-primary">Download for Free</a>
+    </div>
+  </section>
+
+  <!-- ============ ABOUT SNIPPET ============ -->
+  <section class="section-pad" style="background:#fff;">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;">
+        <div>
+          <span class="eyebrow">About Stone World</span>
+          <h2 class="section-title" style="margin-bottom:1.25rem;">India's Leading Supplier of Natural Stone Products & Crafts</h2>
+          <span class="gold-rule"></span>
+          <p style="color:#4a4a4a;line-height:1.9;margin-bottom:1rem;">Founded in 2008, Stone World has reached many milestones & attained new heights in a very short span of time. Our passion for Indian natural stones can be seen in our wide range of finishes & products.</p>
+          <p style="color:#4a4a4a;line-height:1.9;margin-bottom:2rem;">We are always experimenting and coming up with innovative product ideas every day. Our unique thought process brings architects, interior designers and customers from all over India to our showroom in Indore.</p>
+          <a href="/about-us/" class="btn-primary">Our Story</a>
+        </div>
+        <div style="position:relative;">
+          <img src="/wp-content/uploads/2026/01/inner-about-bg.webp" alt="Stone World Indore Showroom — Central India's Largest Stone Showroom" loading="lazy"
+               style="width:100%;height:460px;object-fit:cover;display:block;" />
+          <div style="position:absolute;bottom:-1.75rem;right:-1.75rem;width:180px;height:180px;background:linear-gradient(135deg,#c9a96e,#e8c97a);z-index:-1;"></div>
+          <div style="position:absolute;top:-1.75rem;left:-1.75rem;width:100px;height:100px;border:2px solid #c9a96e;z-index:-1;"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ STORE BANNER ============ -->
+  <section style="position:relative;padding:5rem 1.5rem;background:url('/wp-content/uploads/2025/03/our-store-bg.jpg') center/cover no-repeat;text-align:center;">
+    <div style="position:absolute;inset:0;background:rgba(10,10,10,0.6);"></div>
+    <div style="position:relative;z-index:1;">
+      <span class="eyebrow">Central India's Largest</span>
+      <h2 style="font-family:'Libre Baskerville',serif;font-size:clamp(1.75rem,3vw,2.5rem);color:#fff;margin:0 0 2rem;">Have You Visited Our Store?</h2>
+      <a href="/showroom/" class="btn-primary">View Our Showroom</a>
+    </div>
+  </section>
+
+  <!-- ============ INSTAGRAM GRID ============ -->
+  <section class="section-pad" style="background:#fafaf8;">
+    <div class="container">
+      <div class="text-center" style="margin-bottom:3rem;">
+        <span class="eyebrow">Follow Along</span>
+        <h2 class="section-title">Are You Following Us on Instagram?</h2>
+        <p class="section-subtitle">Daily inspiration from real projects — stones, designs, and completed spaces.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px;">
+        {['DXYnFzQAbdy','DXOQeztiMG0','DW9F270Es5c','DW3umCPFiky',
+          'DWwZNDqjYBI','DWgnOj6k50P','DWTP7dZFUJs','DWOvjHEjIHS'].map(reel => (
+          <a href={`https://www.instagram.com/reel/${reel}/`} target="_blank" rel="noopener noreferrer"
+             style="display:block;aspect-ratio:1;overflow:hidden;background:#e8e2da;position:relative;transition:opacity .3s;"
+             onmouseover="this.style.opacity='0.75'" onmouseout="this.style.opacity='1'" aria-label="View Instagram reel">
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+              <svg width="32" height="32" fill="none" stroke="rgba(201,169,110,0.5)" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke-width="1.2"/><path stroke-width="1.2" d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/></svg>
+            </div>
+          </a>
+        ))}
+      </div>
+      <div class="text-center" style="margin-top:2.5rem;">
+        <a href="https://www.instagram.com/the.stone.world/" target="_blank" rel="noopener noreferrer" class="btn-dark">Follow on Instagram</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TESTIMONIALS ============ -->
+  <section class="section-pad" style="background:#1a1a1a;">
+    <div class="container">
+      <div class="text-center" style="margin-bottom:3.5rem;">
+        <span class="eyebrow">Client Stories</span>
+        <h2 class="section-title section-title--light">What Our Clients Say</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.5rem;">
+        {[
+          { name:'Amit Sharma', role:'Interior Designer, Indore', text:"Stone World's collection is unmatched. The quality of their natural stones transformed our project completely. Highly recommended for any high-end interior project!" },
+          { name:'Priya Mehta', role:'Architect, Mumbai', text:"From selection to delivery, the entire experience was seamless. Their team's expertise in custom stone designs is exceptional. My clients love the results." },
+          { name:'Rajesh Gupta', role:'Homeowner, Delhi', text:"We used their stone cladding for our home facade. The results are stunning and the quality is outstanding. The team guided us at every step. Thank you Stone World!" },
+        ].map(t => (
+          <div class="testimonial-card" style="background:#242424;border-color:#333;">
+            <div class="testimonial-card__stars">
+              {[1,2,3,4,5].map(() => <svg width="14" height="14" fill="#c9a96e" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>)}
+            </div>
+            <p class="testimonial-card__text" style="color:#aaa;">"{t.text}"</p>
+            <p class="testimonial-card__author-name" style="color:#fff;">{t.name}</p>
+            <p class="testimonial-card__author-role">{t.role}</p>
+          </div>
+        ))}
+      </div>
+      <div class="text-center" style="margin-top:2.5rem;">
+        <a href="/testimonials/" class="btn-gold-outline">View All Testimonials</a>
+      </div>
+    </div>
+  </section>
+
+</Layout>
+
+<script>
+  const slides = document.querySelectorAll('.hero-slide') as NodeListOf<HTMLElement>;
+  const dots   = document.querySelectorAll('.hero-dot')  as NodeListOf<HTMLElement>;
+  let cur = 0, timer: ReturnType<typeof setInterval>;
+  function goTo(n: number) {
+    slides[cur].style.opacity = '0'; dots[cur].style.background = 'rgba(255,255,255,0.4)';
+    cur = (n + slides.length) % slides.length;
+    slides[cur].style.opacity = '1'; dots[cur].style.background = '#8B1A1A';
+  }
+  function play() { timer = setInterval(() => goTo(cur + 1), 5500); }
+  document.getElementById('hero-next')?.addEventListener('click', () => { clearInterval(timer); goTo(cur+1); play(); });
+  document.getElementById('hero-prev')?.addEventListener('click', () => { clearInterval(timer); goTo(cur-1); play(); });
+  dots.forEach((d,i) => d.addEventListener('click', () => { clearInterval(timer); goTo(i); play(); }));
+  play();
+</script>
+
+<style>
+@media (max-width: 900px) {
+  .stat-box { border-right: none; border-bottom: 1px solid rgba(201,169,110,0.2); }
+  section[style*="grid-template-columns:1fr 1fr"] > div { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
+}
+@media (max-width: 600px) {
+  .stat-box { padding: 1.25rem 0.5rem; }
+  .stat-number { font-size: 2rem; }
+  section[style*="grid-template-columns:repeat(3,1fr)"] > div { grid-template-columns: 1fr 1fr !important; }
+  section[style*="grid-template-columns:repeat(4,1fr)"] > div { grid-template-columns: repeat(2,1fr) !important; }
+}
+</style>
