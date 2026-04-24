@@ -22,3 +22,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Large catalogue PDFs (served from CDN, not needed in repo)
+public/wp-content/uploads/**/*.pdf
